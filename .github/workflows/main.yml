@@ -1,4 +1,4 @@
-name: Pack Dominio + Push no NuGet
+name: Pack + Push no NuGet
 
 on:
   push:

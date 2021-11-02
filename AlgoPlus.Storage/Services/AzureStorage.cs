@@ -70,7 +70,7 @@ namespace AlgoPlus.Storage.Services
 
             var blob = blobContainer.GetBlobClient(nomeArquivo);
 
-            MemoryStream ms = new();
+            var ms = new MemoryStream();
             await blob.DownloadToAsync(ms);
             byte[] bytes = ms.ToArray();
             return bytes;

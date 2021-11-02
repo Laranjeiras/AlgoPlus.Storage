@@ -1,9 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <Authors>Alexandre Laranjeiras</Authors>
-    <Version>0.1.0</Version>
+    <Version>0.3.1</Version>
+    <PackageProjectUrl>https://github.com/Laranjeiras/AlgoPlus.Storage</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Laranjeiras/AlgoPlus.Storage</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>AWS S3 AZURE</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>

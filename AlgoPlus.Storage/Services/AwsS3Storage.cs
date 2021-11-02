@@ -72,7 +72,7 @@ namespace AlgoPlus.Storage.Services
         {
             try
             {
-                DeleteObjectRequest request = new()
+                DeleteObjectRequest request = new DeleteObjectRequest()
                 {
                     BucketName = bucketname,
                     Key = path
@@ -146,7 +146,7 @@ namespace AlgoPlus.Storage.Services
         {
             try
             {
-                ListObjectsRequest request = new()
+                ListObjectsRequest request = new ListObjectsRequest()
                 {
                     BucketName = bucketname
                 };

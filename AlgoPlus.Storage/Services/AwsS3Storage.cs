@@ -16,13 +16,16 @@ namespace AlgoPlus.Storage.Services
         private readonly string bucketname;
         private readonly IAmazonS3 client;
         private readonly Amazon.RegionEndpoint regionEndpoint;
+        private readonly string name;
+        public string Name => name;
 
-        public AwsS3Storage(AwsS3Config config)
+        public AwsS3Storage(AwsS3Config config, string name = null)
         {
             this.regionEndpoint = Amazon.RegionEndpoint.GetBySystemName(config.RegionEndPoint);
             this.bucketname = config.Bucketname;
             var awsCredential = new BasicAWSCredentials(config.AccessKey, config.SecretKey);
             client = new AmazonS3Client(awsCredential, this.regionEndpoint);
+            this.name = name ?? nameof(AwsS3Storage);
         }
 
         public async Task<ReturnFileInfo> SaveAsync(string filename, string content)

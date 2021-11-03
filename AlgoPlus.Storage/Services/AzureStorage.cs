@@ -16,11 +16,15 @@ namespace AlgoPlus.Storage.Services
         private readonly bool replaceIfExist;
         private readonly string containerName;
 
-        public AzureStorage(AzureConfig azureConfig)
+        private readonly string name;
+        public string Name => name;
+
+        public AzureStorage(AzureConfig azureConfig, string name = null)
         {
             this.blobServiceClient = new BlobServiceClient(azureConfig.ConnectionString);
             this.replaceIfExist = azureConfig.ReplaceIfExist;
             this.containerName = azureConfig.Container;
+            this.name = name ?? nameof(AzureStorage);
         }
 
         public async Task<ReturnFileInfo> SaveAsync(string filename, string content)

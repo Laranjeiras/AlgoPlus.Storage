@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace AlgoPlus.Storage.Services
@@ -9,67 +10,89 @@ namespace AlgoPlus.Storage.Services
     {
         private readonly string baseDirectory;
 
-        public LocalDiskStorage(string baseDirectory)
+        private readonly string name;
+        public string Name => name;
+
+        public LocalDiskStorage(string baseDirectory, string name = null)
         {
             this.baseDirectory = baseDirectory;
+            this.name = name ?? nameof(LocalDiskStorage);
         }
 
         public async Task<ReturnFileInfo> SaveAsync(string filename, string content)
         {
+            var bytes = Encoding.ASCII.GetBytes(content);
+            return await SaveAsync(filename, bytes);
+        }
+
+        public async Task<ReturnFileInfo> SaveAsync(string filename, byte[] content)
+        {
             if (filename == null)
                 throw new ArgumentNullException(nameof(filename), "O nome do arquivo deve ser informado");
             if (content == null)
-                throw new ArgumentNullException(nameof(content), "O conteúdo do arquivo deve ser informado");
+                throw new ArgumentNullException(nameof(content), "O conteudo do arquivo deve ser informado");
 
-            //var diretorio = Path.Combine(baseDirectory, subDiretorio);
-
-            CriarDiretorioSeNaoExistir(baseDirectory);
+            CreateDirectoryIfNotExist(baseDirectory);
 
             var file = Path.Combine(baseDirectory, filename);
-            var stw = new StreamWriter(file);
-            await stw.WriteLineAsync(content);
-            stw.Close();
+            await File.WriteAllBytesAsync(file, content);
+
             var info = new FileInfo(file);
-            var returnInfo = new ReturnFileInfo { 
+            var returnInfo = new ReturnFileInfo
+            {
                 Filename = info.Name,
                 AbsolutePath = info.FullName,
                 RelativePath = info.DirectoryName,
                 ContentLength = info.Length,
                 CreatedOn = info.CreationTimeUtc,
-                LastModified =info.LastWriteTimeUtc,
+                LastModified = info.LastWriteTimeUtc,
             };
             return returnInfo;
         }
 
-        public Task<ReturnFileInfo> SaveAsync(string filename, byte[] content)
+        public async Task<bool> DeleteAsync(string path)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            return await Task.FromResult(true);
         }
 
-        public Task<bool> DeleteAsync(string path)
+        public async Task<IList<ReturnFileInfo>> GetFilesAsync()
         {
-            throw new NotImplementedException();
+            var files = Directory.GetFiles(baseDirectory, "*", SearchOption.AllDirectories);
+            var returnFiles = new List<ReturnFileInfo>();
+
+            foreach (var file in files)
+            {
+                var info = new FileInfo(file);
+                var returnFile = new ReturnFileInfo
+                {
+                    AbsolutePath = info.FullName,
+                    ContentLength = info.Length,
+                    CreatedOn = info.CreationTime,
+                    LastModified = info.LastWriteTime,
+                    Filename = info.Name,
+                };
+                returnFiles.Add(returnFile);
+            }
+
+            return await Task.FromResult(returnFiles);
         }
 
-        public Task<IList<ReturnFileInfo>> GetFilesAsync()
+        public async Task<byte[]> GetFileAsync(string path)
         {
-            throw new NotImplementedException();
+            var file = await File.ReadAllBytesAsync(path);
+            return file;
         }
 
-        public Task<byte[]> GetFileAsync(string path)
+        private static string CreateDirectoryIfNotExist(string directory)
         {
-            throw new NotImplementedException();
-        }
+            if (directory == null)
+                throw new ArgumentNullException(nameof(directory));
 
-        private static string CriarDiretorioSeNaoExistir(string diretorio)
-        {
-            if (diretorio == null)
-                throw new ArgumentNullException(nameof(diretorio));
+            if (!Directory.Exists(directory))
+                Directory.CreateDirectory(directory);
 
-            if (!Directory.Exists(diretorio))
-                Directory.CreateDirectory(diretorio);
-
-            return diretorio;
+            return directory;
         }
     }
 }

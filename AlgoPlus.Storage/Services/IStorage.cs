@@ -5,6 +5,7 @@ namespace AlgoPlus.Storage.Services
 {
     public interface IStorage
     {
+        string Name { get; }
         /// <summary>
         /// 
         /// </summary>
@@ -22,6 +23,7 @@ namespace AlgoPlus.Storage.Services
         /// <param name="content">file content</param>
         /// <returns></returns>
         Task<ReturnFileInfo> SaveAsync(string filename, byte[] content);
+
         Task<bool> DeleteAsync(string path);
 
         Task<byte[]> GetFileAsync(string path);

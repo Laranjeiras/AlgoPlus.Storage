@@ -19,12 +19,24 @@ namespace AlgoPlus.Storage.Services
             this.name = name ?? nameof(LocalDiskStorage);
         }
 
+        /// <summary>
+        /// Save file to base directory, concat base directory + filename
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <param name="content"></param>
+        /// <returns></returns>
         public async Task<ReturnFileInfo> SaveAsync(string filename, string content)
         {
             var bytes = Encoding.ASCII.GetBytes(content);
             return await SaveAsync(filename, bytes);
         }
 
+        /// <summary>
+        /// Save file to base directory, concat base directory + filename
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <param name="content"></param>
+        /// <returns></returns>
         public async Task<ReturnFileInfo> SaveAsync(string filename, byte[] content)
         {
             if (filename == null)
@@ -32,12 +44,13 @@ namespace AlgoPlus.Storage.Services
             if (content == null)
                 throw new ArgumentNullException(nameof(content), "O conteudo do arquivo deve ser informado");
 
-            CreateDirectoryIfNotExist(baseDirectory);
-
             var file = Path.Combine(baseDirectory, filename);
+            var info = new FileInfo(file);
+
+            CreateDirectoryIfNotExist(info.DirectoryName);
+
             await File.WriteAllBytesAsync(file, content);
 
-            var info = new FileInfo(file);
             var returnInfo = new ReturnFileInfo
             {
                 Filename = info.Name,
@@ -52,7 +65,7 @@ namespace AlgoPlus.Storage.Services
 
         public async Task<bool> DeleteAsync(string path)
         {
-            //throw new NotImplementedException();
+            File.Delete(path);
             return await Task.FromResult(true);
         }
 

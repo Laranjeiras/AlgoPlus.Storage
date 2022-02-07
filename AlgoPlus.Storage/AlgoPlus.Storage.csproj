@@ -11,6 +11,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="https:\github.com\Laranjeiras\AlgoPlus.Storage\blob\main\README.md" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AWSSDK.S3" Version="3.7.3.21" />
     <PackageReference Include="Azure.Storage.Blobs" Version="12.10.0" />
   </ItemGroup>

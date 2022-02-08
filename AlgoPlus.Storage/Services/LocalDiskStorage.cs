@@ -40,14 +40,14 @@ namespace AlgoPlus.Storage.Services
         public async Task<ReturnFileInfo> SaveAsync(string filename, byte[] content)
         {
             if (filename == null)
-                throw new ArgumentNullException(nameof(filename), "O nome do arquivo deve ser informado");
+                throw new ArgumentNullException(nameof(filename), "The file name must be provided");
             if (content == null)
-                throw new ArgumentNullException(nameof(content), "O conteudo do arquivo deve ser informado");
+                throw new ArgumentNullException(nameof(content), "The contents of the file must be informed");
 
             var file = Path.Combine(baseDirectory, filename);
             var info = new FileInfo(file);
 
-            CreateDirectoryIfNotExist(info.DirectoryName);
+            CreateDirectoryIfNotExist(info.Directory.FullName);
 
             await File.WriteAllBytesAsync(file, content);
 

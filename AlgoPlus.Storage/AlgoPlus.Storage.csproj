@@ -2,18 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <Authors>Alexandre Laranjeiras</Authors>
-    <Version>0.3.11</Version>
+    <Authors>Alexandre Laranjeiras (laranja22@hotmail.com)</Authors>
+    <Version>0.3.12</Version>
     <PackageProjectUrl>https://github.com/Laranjeiras/AlgoPlus.Storage</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Laranjeiras/AlgoPlus.Storage</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>AWS S3 AZURE</PackageTags>
+    <Copyright>laranja22@hotmail.com</Copyright>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Include="https:\github.com\Laranjeiras\AlgoPlus.Storage\blob\main\README.md" />
-  </ItemGroup>
-
+  
   <ItemGroup>
     <PackageReference Include="AWSSDK.S3" Version="3.7.3.21" />
     <PackageReference Include="Azure.Storage.Blobs" Version="12.10.0" />

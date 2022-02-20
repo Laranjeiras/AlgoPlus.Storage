@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Authors>Alexandre Laranjeiras (laranja22@hotmail.com)</Authors>
-    <Version>0.3.12</Version>
+    <Version>0.3.13</Version>
     <PackageProjectUrl>https://github.com/Laranjeiras/AlgoPlus.Storage</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Laranjeiras/AlgoPlus.Storage</RepositoryUrl>
     <RepositoryType>git</RepositoryType>

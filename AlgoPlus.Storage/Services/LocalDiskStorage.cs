@@ -12,6 +12,7 @@ namespace AlgoPlus.Storage.Services
 
         private readonly string name;
         public string Name => name;
+        public string BasePath => baseDirectory;
 
         public LocalDiskStorage(string baseDirectory, string name = null)
         {

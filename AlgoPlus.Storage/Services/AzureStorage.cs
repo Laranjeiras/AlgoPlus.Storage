@@ -18,6 +18,7 @@ namespace AlgoPlus.Storage.Services
 
         private readonly string name;
         public string Name => name;
+        public string BasePath => null;
 
         public AzureStorage(AzureConfig azureConfig, string name = null)
         {

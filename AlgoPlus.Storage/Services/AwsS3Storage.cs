@@ -18,6 +18,7 @@ namespace AlgoPlus.Storage.Services
         private readonly Amazon.RegionEndpoint regionEndpoint;
         private readonly string name;
         public string Name => name;
+        public string BasePath => null;
 
         public AwsS3Storage(AwsS3Config config, string name = null)
         {

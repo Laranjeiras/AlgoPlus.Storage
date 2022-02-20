@@ -6,6 +6,8 @@ namespace AlgoPlus.Storage.Services
     public interface IStorage
     {
         string Name { get; }
+
+        string BasePath { get; }
         /// <summary>
         /// 
         /// </summary>

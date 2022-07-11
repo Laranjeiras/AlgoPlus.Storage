@@ -63,7 +63,13 @@ namespace AlgoPlus.Storage.Services
                 }
             }
 
-            return new ReturnFileInfo { Filename = filename, AbsolutePath = "TESTE" };
+            return new ReturnFileInfo { 
+                Filename = filename,
+                AbsolutePath = "TESTE",
+                CreatedOn = DateTimeOffset.UtcNow,
+                ContentLength = content.Length,
+                LastModified = DateTimeOffset.UtcNow,
+            };
         }
 
         public async Task<ReturnFileInfo> SaveAsync(string filename, byte[] content)

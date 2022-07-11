@@ -7,8 +7,8 @@ namespace AlgoPlus.Storage
         public string AbsolutePath { get; set; }
         public string RelativePath { get; set; }
         public string Filename { get; set; }
-        public DateTime? CreatedOn { get; set; }
-        public DateTime? LastModified { get; set; }
+        public DateTimeOffset? CreatedOn { get; set; }
+        public DateTimeOffset? LastModified { get; set; }
         public long? ContentLength { get; set; }
     }
 }

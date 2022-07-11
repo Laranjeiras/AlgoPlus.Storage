@@ -46,7 +46,13 @@ namespace AlgoPlus.Storage.Services
                 var blobClient = containerClient.GetBlobClient(filename);
                 await blobClient.UploadAsync(new MemoryStream(content), replaceIfExist);
 
-                return new ReturnFileInfo { Filename = filename, AbsolutePath = blobClient.Uri.AbsoluteUri };
+                return new ReturnFileInfo { 
+                    Filename = filename,
+                    AbsolutePath = blobClient.Uri.AbsoluteUri,
+                    ContentLength = content.Length,
+                    CreatedOn =  DateTimeOffset.UtcNow,
+                    LastModified = DateTimeOffset.UtcNow,
+                };
 
             }
             catch (RequestFailedException)
